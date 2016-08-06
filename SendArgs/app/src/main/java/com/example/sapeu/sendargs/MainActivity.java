@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         TextView t = (TextView) findViewById(R.id.text);
         if (data != null){
             t.setText("另一个Activity返回的数据"+data.getStringExtra("data"));
+        }else {
+            t.setText("没有接收到另一个Activity返回的数据");
         }
     }
 }
