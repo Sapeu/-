@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         TextView t = (TextView) findViewById(R.id.text);
-        t.setText("另一个Activity返回的数据"+data.getStringExtra("data"));
+        if (data != null){
+            t.setText("另一个Activity返回的数据"+data.getStringExtra("data"));
+        }
     }
 }
