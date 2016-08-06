@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Send Args</string>
+    <string name="send_args">发送数据</string>
+</resources>

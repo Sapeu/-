@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Android Activity</string>
+    <string name="a2">这是第二个Activity</string>
+    <string name="a">这是第一个Activity</string>
+    <string name="toa2">跳到第二个Activity</string>
+    <string name="toa">跳到第一个Activity</string>
+    <string name="tod">跳到对话框</string>
+    <string name="d">这是对话框</string>
+</resources>
