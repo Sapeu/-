@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sapeu.learnintent">
+    package="com.example.sapeu.app1">
 
     <application
         android:allowBackup="true"
@@ -13,13 +13,6 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <!-- android:exported 是否导出 -->
-        <activity android:name=".MyAty" android:exported="false">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="com.example.sapeu.learnintent.action.MyAty"/>
             </intent-filter>
         </activity>
     </application>

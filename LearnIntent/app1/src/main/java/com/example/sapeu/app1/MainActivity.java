@@ -1,20 +1,25 @@
-package com.example.sapeu.learnintent;
+package com.example.sapeu.app1;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String ACTION_MYATY = "com.example.sapeu.learnintent.action.MyAty";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        findViewById(R.id.to_my_aty).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.to_app_my_aty).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ACTION_MYATY));
+                try {
+                    startActivity(new Intent("com.example.sapeu.learnintent.action.MyAty"));
+                }catch (Exception e){
+                    Toast.makeText(MainActivity.this,"无法启动指定的Activity",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
