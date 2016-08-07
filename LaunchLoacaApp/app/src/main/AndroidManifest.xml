@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sapeu.learnintent">
+    package="com.example.sapeu.launchloacaapp">
 
     <application
         android:allowBackup="true"
@@ -15,25 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- android:exported 是否导出 -->
-        <!--<activity
-            android:name=".MyAty"
-            android:exported="false"
-            android:label="@string/my_aty">-->
-        <activity
-            android:name=".MyAty"
-            android:label="@string/my_aty">
+        <activity android:name=".LocalAppActivity">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="com.example.sapeu.learnintent.action.MYATY" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Main2Activity"
-            android:label="@string/main_2">
-            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="com.example.sapeu.learnintent.action.MYATY"/>
+                <action android:name="com.example.sapeu.launchloacaapp.LOCALAPP"/>
                 <data android:scheme="app"/>
             </intent-filter>
         </activity>

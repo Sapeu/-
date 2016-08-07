@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String ACTION_MYATY = "com.example.sapeu.learnintent.action.MyAty";
+    public static final String ACTION_MYATY = "com.example.sapeu.learnintent.action.MYATY";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

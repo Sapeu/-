@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">"Launch Loaca App "</string>
+    <string name="local_app">这是用于被浏览器链接启动的一个本地Activity</string>
+</resources>

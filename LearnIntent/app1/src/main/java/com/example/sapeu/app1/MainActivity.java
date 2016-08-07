@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    startActivity(new Intent("com.example.sapeu.learnintent.action.MyAty", Uri.parse("app://hello")));
+                    startActivity(new Intent("com.example.sapeu.learnintent.action.MYATY", Uri.parse("app://hello")));
                 }catch (Exception e){
                     Toast.makeText(MainActivity.this,"无法启动指定的Activity",Toast.LENGTH_SHORT).show();
                 }
