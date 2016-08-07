@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Learn Context</string>
+    <string name="lean_context">学习安卓的Context</string>
+    <string name="save">保存</string>
+</resources>
