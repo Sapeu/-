@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Learn Intent</string>
+    <string name="to_my_aty">到另一个Activity</string>
+</resources>
