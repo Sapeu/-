@@ -16,10 +16,25 @@
             </intent-filter>
         </activity>
         <!-- android:exported 是否导出 -->
-        <activity android:name=".MyAty" android:exported="false">
+        <!--<activity
+            android:name=".MyAty"
+            android:exported="false"
+            android:label="@string/my_aty">-->
+        <activity
+            android:name=".MyAty"
+            android:label="@string/my_aty">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="com.example.sapeu.learnintent.action.MyAty" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Main2Activity"
+            android:label="@string/main_2">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT"/>
                 <action android:name="com.example.sapeu.learnintent.action.MyAty"/>
+                <data android:scheme="app"/>
             </intent-filter>
         </activity>
     </application>
