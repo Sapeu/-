@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Connect Service</string>
+    <string name="start_service">启动服务</string>
+    <string name="stop_service">停止服务</string>
+    <string name="edit_hint">请输入</string>
+    <string name="edit_default">你还没有输入</string>
+    <string name="bind_service">绑定服务</string>
+    <string name="unbind_service">解除绑定服务</string>
+    <string name="save_data">保存数居</string>
+</resources>
