@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Component Permission</string>
+    <string name="main2_text">Main2Activity被启动</string>
+    <string name="start_main2">启动Main2Activity</string>
+</resources>
