@@ -14,7 +14,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_message);
+        setContentView(R.layout.content_my);
         // 获取intent传过来的值
         Intent intent = getIntent();
         String message = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
