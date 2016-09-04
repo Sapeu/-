@@ -45,11 +45,11 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <!--<Button
+        &lt;!&ndash;<Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/prev_button"
@@ -63,7 +63,7 @@
             android:text="@string/next_button"
             android:id="@+id/next_button"
             android:drawableRight="@drawable/arrow_right"
-            android:drawablePadding="4dp"/>-->
+            android:drawablePadding="4dp"/>&ndash;&gt;
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -78,14 +78,20 @@
             android:id="@+id/next_button"
             android:src="@drawable/arrow_right"
             android:contentDescription="@string/next_button"/>
-    </LinearLayout>
+    </LinearLayout>-->
 
-    <!--<Button
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cheat_button"
+        android:text="@string/cheat_button"/>
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/next_button"
         android:id="@+id/next_button"
         android:drawableRight="@drawable/arrow_right"
-        android:drawablePadding="4dp"/>-->
+        android:drawablePadding="4dp"/>
 
 </LinearLayout>
