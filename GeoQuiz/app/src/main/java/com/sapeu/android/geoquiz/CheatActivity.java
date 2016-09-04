@@ -2,6 +2,7 @@ package com.sapeu.android.geoquiz;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class CheatActivity extends AppCompatActivity {
     private boolean mAnswerIsTrue;
     private Button mShowAnswer;
     private TextView mAnswerTextView;
+    private TextView mSdkVersionTextView;
 
     public static Intent newIntent(Context packageCcontext,boolean answerIsTrue){
         Intent i = new Intent(packageCcontext,CheatActivity.class);
@@ -35,6 +37,9 @@ public class CheatActivity extends AppCompatActivity {
         if (null != savedInstanceState){
             mAnswerIsTrue = savedInstanceState.getBoolean(KEY_ANSWER_IS_TRUE,false);
         }
+
+        mSdkVersionTextView = (TextView) findViewById(R.id.sdk_version_text_view);
+        mSdkVersionTextView.setText(String.format("API level %d",Build.VERSION.SDK_INT));
 
         mAnswerIsTrue = getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE,false);
 
