@@ -36,22 +36,22 @@ public class CrimeFragment extends Fragment {
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
 
-    public static CrimeFragment newInstance(UUID crimeId){
+    public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID,crimeId);
+        args.putSerializable(ARG_CRIME_ID, crimeId);
         CrimeFragment crimeFragment = new CrimeFragment();
         crimeFragment.setArguments(args);
         return crimeFragment;
     }
 
-    public void returnResult(){
-        getActivity().setResult(Activity.RESULT_OK,null);
+    public void returnResult() {
+        getActivity().setResult(Activity.RESULT_OK, null);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i(TAG,"onCreate(@Nullable Bundle 2savedInstanceState) called");
+        Log.i(TAG, "onCreate(@Nullable Bundle 2savedInstanceState) called");
 //        mCrime = new Crime();
 //        UUID crimeId = (UUID) getActivity().getIntent().getSerializableExtra(CrimeActivity.EXTRA_CRIME_ID);
         UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
@@ -62,13 +62,13 @@ public class CrimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        super.onCreateView(inflater, container, savedInstanceState);
-        Log.d(TAG,"onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) called");
+        Log.d(TAG, "onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) called");
         /**
          * @param1 通过调用LayoutInflater.inflate(...)方法并传入布局的资源ID生成fragment的视图
          * @param2 视图的父视图，通常需要父视图来正确配置组件
          * @param3 告知布局生成是否将生成的视图添加给父视图
          */
-        View v= inflater.inflate(R.layout.fragment_crime,container,false);
+        View v = inflater.inflate(R.layout.fragment_crime, container, false);
 
         mTitleField = (EditText) v.findViewById(R.id.crime_title);
         mTitleField.setText(mCrime.getTitle());
@@ -98,8 +98,8 @@ public class CrimeFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
 //                DialogFragment dialog = new DatePickerFragment();
                 DialogFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this,REQUEST_DATE);
-                dialog.show(fragmentManager,DIALOG_DATE);
+                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                dialog.show(fragmentManager, DIALOG_DATE);
             }
         });
 
@@ -117,11 +117,11 @@ public class CrimeFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK){
+        if (resultCode != Activity.RESULT_OK) {
             return;
         }
 
-        if (requestCode == REQUEST_DATE){
+        if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
@@ -129,6 +129,13 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(DateFormat.format("yyyy年M月d日 EEEE",mCrime.getDate()));
+        mDateButton.setText(DateFormat.format("yyyy年M月d日 EEEE", mCrime.getDate()));
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        CrimeLab.get(getActivity()).updateCrime(mCrime);
     }
 }
