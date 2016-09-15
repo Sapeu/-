@@ -3,11 +3,16 @@ package com.sapeu.android.criminalintent;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.ShareCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -30,11 +35,14 @@ public class CrimeFragment extends Fragment {
     private static final String ARG_CRIME_ID = "crime_id";
     private static final String DIALOG_DATE = "DialogDate";
     private static final int REQUEST_DATE = 0;
+    private static final int REQUEST_CONTACT = 1;
     private static final String TAG = "CrimeFragment";
     private Crime mCrime;
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+    private Button mReportButtoon;
+    private Button mSuspectButton;
 
     public static CrimeFragment newInstance(UUID crimeId) {
         Bundle args = new Bundle();
@@ -112,6 +120,44 @@ public class CrimeFragment extends Fragment {
             }
         });
 
+        mReportButtoon = (Button) v.findViewById(R.id.crime_report);
+        mReportButtoon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("text/plain");
+                i.putExtra(Intent.EXTRA_TEXT, getCrimeReport());
+                i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.crime_report_subject));
+
+                /*Intent i = ShareCompat.IntentBuilder.from(getActivity())
+                        .setType("text/plain")
+                        .setText(getCrimeReport())
+                        .setSubject(getString(R.string.crime_report_subject))
+                        .getIntent();*/
+
+                startActivity(i);
+            }
+        });
+
+        final Intent pickContent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+//        pickContent.addCategory(Intent.CATEGORY_HOME);
+        mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
+        mSuspectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivityForResult(pickContent, REQUEST_CONTACT);
+            }
+        });
+
+        if (null != mCrime.getSuspect()) {
+            mSuspectButton.setText(mCrime.getSuspect());
+        }
+
+        PackageManager packageManager = getActivity().getPackageManager();
+        if (null == packageManager.resolveActivity(pickContent, PackageManager.MATCH_DEFAULT_ONLY)) {
+            mSuspectButton.setEnabled(false);
+        }
+
         return v;
     }
 
@@ -125,6 +171,27 @@ public class CrimeFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             mCrime.setDate(date);
             updateDate();
+        } else if (requestCode == REQUEST_CONTACT && null != data) {
+            // 得到的数据
+            Uri contactUri = data.getData();
+            // 请指定要查询的字段以返回值的字段
+            String[] queryFields = new String[]{ContactsContract.Contacts.DISPLAY_NAME};
+            // 类型与数据库 where 查询方法
+            Cursor c = getActivity().getContentResolver().query(contactUri, queryFields, null, null, null);
+
+            try {
+                if (c.getCount() == 0) {
+                    return;
+                }
+
+                // 嫌疑人的名字在第一行数据的中第一列
+                c.moveToFirst();
+                String suspect = c.getString(0);
+                mCrime.setSuspect(suspect);
+                mSuspectButton.setText(suspect);
+            } finally {
+                c.close();
+            }
         }
     }
 
@@ -132,10 +199,31 @@ public class CrimeFragment extends Fragment {
         mDateButton.setText(DateFormat.format("yyyy年M月d日 EEEE", mCrime.getDate()));
     }
 
-
     @Override
     public void onPause() {
         super.onPause();
         CrimeLab.get(getActivity()).updateCrime(mCrime);
+    }
+
+    private String getCrimeReport() {
+        String solvedString = null;
+        if (mCrime.isSolved()) {
+            solvedString = getString(R.string.crime_report_solved);
+        } else {
+            solvedString = getString(R.string.crime_report_unsolved);
+        }
+
+        String dateFormat = "EEE, MMM dd";
+        String dateString = DateFormat.format(dateFormat, mCrime.getDate()).toString();
+
+        String suspect = mCrime.getSuspect();
+        if (null == suspect) {
+            suspect = getString(R.string.crime_report_no_suspect);
+        } else {
+            suspect = getString(R.string.crime_report_suspect, suspect);
+        }
+
+        String report = getString(R.string.crime_report, mCrime.getTitle(), dateString, solvedString, suspect);
+        return report;
     }
 }
