@@ -18,7 +18,7 @@ import java.util.UUID;
  * Created by Sapeu on 2016/9/11.
  */
 //public class CrimePagerActivity extends FragmentActivity {
-public class CrimePagerActivity extends AppCompatActivity {
+public class CrimePagerActivity extends AppCompatActivity implements CrimeFragment.Callbacks {
 
     private static final String EXTRA_CRIME_ID = "com.sapeu.android.criminalintent.crime_id";
     private ViewPager mViewPager;
@@ -60,5 +60,10 @@ public class CrimePagerActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onCrimeUpdated(Crime crime) {
+
     }
 }
