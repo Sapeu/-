@@ -47,12 +47,13 @@ public class PhotoGalleryFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            try {
-                String result = new FlickrFetchr().getUrlString("http://image.baidu.com/i?tn=resultjsonavstar&ie=utf-8&word=刘德华&pn=0&rn=60");
-                Log.i(TAG,"Fetched contents of URL: " + result);
-            } catch (IOException e) {
-                Log.e(TAG,"Failed to fetch URL: " + e);
-            }
+//            try {
+//                String result = new FlickrFetchr().getUrlString("http://image.baidu.com/channel/listjson?pn=0&rn=30&tag1=%E6%98%8E%E6%98%9F&tag2=%E5%85%A8%E9%83%A8&ftags=%E5%A5%B3%E6%98%8E%E6%98%9F&ie=utf8");
+//                Log.i(TAG,"Fetched contents of URL: " + result);
+//            } catch (IOException e) {
+//                Log.e(TAG,"Failed to fetch URL: ", e);
+//            }
+            new FlickrFetchr().fetchItems();
             return null;
         }
     }
