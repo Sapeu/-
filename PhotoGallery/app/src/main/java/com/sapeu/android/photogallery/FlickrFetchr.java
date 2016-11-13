@@ -68,15 +68,16 @@ public class FlickrFetchr {
                     .appendQueryParameter("height","")
                     .appendQueryParameter("istype","")
                     .appendQueryParameter("cg","wallpaper")
-                    .appendQueryParameter("pn","30")
-                    .appendQueryParameter("rn","30")
+                    .appendQueryParameter("pn","1") // 第几页
+                    .appendQueryParameter("rn","100") // 一页中的数量
                     .appendQueryParameter("ipn","rj")
-                    .appendQueryParameter("word","动漫壁纸")
+                    .appendQueryParameter("word","动漫")
                     .build().toString();
             String jsonString = getUrlString(url);
             Log.i(TAG,"Received "+ url +" JSON: " + jsonString);
             JSONObject jsonBody = new JSONObject(jsonString);
             parseItems(items,jsonBody);
+            Log.i(TAG,items.toString());
         } catch (IOException e) {
             Log.e(TAG,"Failed to fetch items ", e);
         } catch (JSONException e) {
@@ -85,6 +86,12 @@ public class FlickrFetchr {
         return items;
     }
 
+    /**
+     * 解析JSON 到 items
+     * @param items 图片对象集合
+     * @param jsonBody 示例化后的json对象
+     * @throws JSONException json异常
+     */
     private void parseItems(List<GalleryItem> items,JSONObject jsonBody) throws JSONException {
 //        JSONObject photosJsonObject = jsonBody.getJSONObject("data");
         JSONArray photoJsonArray = jsonBody.getJSONArray("data");
@@ -93,17 +100,11 @@ public class FlickrFetchr {
             JSONObject photoJsonObject = photoJsonArray.getJSONObject(i);
 
             GalleryItem item = new GalleryItem();
-            if (!photoJsonObject.has("di")) {
+            if (!photoJsonObject.has("di") || !photoJsonObject.has("objURL") || !photoJsonObject.has("fromPageTitleEnc")) {
                 continue;
             }
             item.setId(photoJsonObject.getString("di"));
-            if (!photoJsonObject.has("fromPageTitleEnc")) {
-                continue;
-            }
             item.setCaption(photoJsonObject.getString("fromPageTitleEnc"));
-            if (!photoJsonObject.has("objURL")) {
-                continue;
-            }
             item.setUrl(photoJsonObject.getString("objURL"));
             items.add(item);
         }
