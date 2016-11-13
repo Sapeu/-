@@ -71,7 +71,7 @@ public class FlickrFetchr {
                     .appendQueryParameter("pn","1") // 第几页
                     .appendQueryParameter("rn","100") // 一页中的数量
                     .appendQueryParameter("ipn","rj")
-                    .appendQueryParameter("word","动漫")
+                    .appendQueryParameter("word","逗比表情")
                     .build().toString();
             String jsonString = getUrlString(url);
             Log.i(TAG,"Received "+ url +" JSON: " + jsonString);
