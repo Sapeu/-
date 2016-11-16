@@ -29,8 +29,8 @@ import java.util.List;
 /**
  * Created by Sapeu on 2016/11/2.
  */
-
-public class PhotoGalleryFragment extends Fragment {
+//public class PhotoGalleryFragment extends Fragment {
+public class PhotoGalleryFragment extends VisibleFragment {
 
     private static final String TAG = "PhotoGalleryFragment";
     private RecyclerView mPhotoRecyclerView;
