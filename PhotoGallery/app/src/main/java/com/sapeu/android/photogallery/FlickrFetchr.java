@@ -163,12 +163,13 @@ public class FlickrFetchr {
             JSONObject photoJsonObject = photoJsonArray.getJSONObject(i);
 
             GalleryItem item = new GalleryItem();
-            if (!photoJsonObject.has("di") || !photoJsonObject.has("objURL") || !photoJsonObject.has("fromPageTitleEnc")) {
+            if (!photoJsonObject.has("di") || !photoJsonObject.has("objURL") || !photoJsonObject.has("fromPageTitleEnc") || !photoJsonObject.has("fromURLHost")) {
                 continue;
             }
             item.setId(photoJsonObject.getString("di"));
             item.setCaption(photoJsonObject.getString("fromPageTitleEnc"));
             item.setUrl(photoJsonObject.getString("objURL"));
+            item.setOwner(photoJsonObject.getString("fromURLHost"));
             items.add(item);
         }
     }
