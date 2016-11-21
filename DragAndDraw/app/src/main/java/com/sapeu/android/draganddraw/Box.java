@@ -10,9 +10,9 @@ public class Box {
     private PointF mOrigin;
     private PointF mCurrent;
 
-    public Box(PointF origin, PointF current) {
+    public Box(PointF origin) {
         mOrigin = origin;
-        mCurrent = current;
+        mCurrent = origin;
     }
 
     public PointF getOrigin() {
